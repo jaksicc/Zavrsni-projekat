@@ -68,6 +68,16 @@ export const getIngredientImg = (ingredient) => {
 }
 
 
+
+// LOGIN I REGISTER
+
+export const getUsers = () => {
+    return axios.get('http://localhost:3005/users')
+}
+
+export const postUser = (username, email, password) => {
+    return axios.post('http://localhost:3005/users', {username, email, password})
+}
 ////////////////////////////////////////////
 export const getOrdinaryDrinks = () => {
     return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink")

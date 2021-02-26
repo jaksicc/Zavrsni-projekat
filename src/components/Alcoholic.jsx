@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { filterByAlcoholic } from "../service"
 
 const Alcoholic = () => {
@@ -15,10 +15,10 @@ const Alcoholic = () => {
 
     return (
         <>
-        {drinksbyalcoholic.map(drink => <div key={drink.strDrink}>
+        {drinksbyalcoholic.map(drink => <Link to={`/categories/item/${drink.idDrink}`} key={drink.strDrink}>
             <p>{drink.strDrink}</p>
-            <img src={drink.strDrinkThumb} alt=""/>
-        </div>)}
+            <img src={`${drink.strDrinkThumb}/preview`} />
+        </Link>)}
         </>
     )
 }

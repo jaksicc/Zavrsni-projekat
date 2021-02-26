@@ -1,46 +1,26 @@
 import { useEffect, useState } from "react"
-import Cocktails from "./components/Cocktails"
-import OrdinaryDrinks from "./components/OrdinaryDrinks"
-import Select from "./components/Select"
-import Shots from "./components/Shots"
-import { getAllCategories, getAllGlasses, getAllIngredients, getBeer, getByAlcohol, getHomemadeLiqueur, getMilkFloatShake, getOrdinaryDrinks, getSoftDrinks } from "./service"
+import { getAllCategories, getAllGlasses, getAllIngredients, getByAlcohol } from "./service"
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import Categories from "./components/Categories"
-import Category from "./components/Category"
+import Categories from "./components/Categories/Categories"
+import Category from "./components/Categories/Category"
 import Glasses from "./components/Glasses"
 import Glass from "./components/Glass"
 import Ingredients from "./components/Ingredients"
 import Ingredient from "./components/Ingredient"
 import Alcoholics from "./components/Alcoholics"
 import Alcoholic from "./components/Alcoholic"
-import CocktailInfo from "./components/CocktailInfo"
+import CocktailInfo from "./components/CocktailInfo/CocktailInfo"
 import RandomCocktail from "./components/RandomCocktail"
 import IngredientInfo from "./components/IngredientInfo"
+import Login from "./components/Login"
+import Register from "./components/Register"
+import StyledCategories from "./components/Categories/StyledCategories"
 
 
 
 const App = () => {
 
-  // useEffect(() => {
-  //   getMilkFloatShake().then(res => console.log(res.data))
-  // }, [])
-
-  // useEffect(() => {
-  //   getOrdinaryDrinks().then(res => console.log(res.data))
-  // }, [])
-
-  // useEffect(() => {
-  //   getHomemadeLiqueur().then(res => console.log(res.data))
-  // }, [])
-
-  // useEffect(() => {
-  //   getBeer().then(res => console.log(res.data))
-  // }, [])
-
-  // useEffect(() => {
-  //   getSoftDrinks().then(res => console.log(res.data))
-  // }, [])
-
+  const [user, setUser] = useState(null)
   const [categories, setCategories] = useState([])
   const [glasses, setGlasses] = useState([])
   const [ingredients, setIngredients] = useState([])
@@ -76,21 +56,37 @@ const App = () => {
     <>
       <Router>
         <nav>
-          <Link style={{ padding: 5 }} to='/categories'>Categories</Link>
-          <Link style={{ padding: 5 }} to='/glasses'>Glasses</Link>
-          <Link style={{ padding: 5 }} to='/ingredients'>Ingredients</Link>
-          <Link style={{ padding: 5 }} to='/alcoholics'>Alcoholic/Non Alcoholic</Link>
-          {/* <Link to='/cocktails'>Cocktails</Link>
-          <Link to='/ordinarydrinks'>Ordinary Drinks</Link>
-          <Link to='/shots'>Shots</Link> */}
+          {user ?
+            <>
+              <p>User: {user.username}</p>
+              <Link style={{ padding: 5 }} to='/categories'>Categories</Link>
+              <Link style={{ padding: 5 }} to='/glasses'>Glasses</Link>
+              <Link style={{ padding: 5 }} to='/ingredients'>Ingredients</Link>
+              <Link style={{ padding: 5 }} to='/alcoholics'>Alcoholic/Non Alcoholic</Link>
+              <RandomCocktail />
+            </>
+            :
+            <>
+              <Link style={{ padding: 5 }} to="/login">Login</Link>
+              <Link style={{ padding: 5 }} to="/register">Register</Link>
+            </>
+
+          }
         </nav>
-        <RandomCocktail />
+
         <hr />
 
         <Switch>
 
+          <Route path="/login">
+            <Login setUser={setUser} />
+          </Route>
 
-          <Route path='/categories/:category/:id'>
+          <Route path="/register">
+            <Register />
+          </Route>
+
+          <Route path='/categories/item/:id'>
             <CocktailInfo />
           </Route>
 
@@ -99,7 +95,7 @@ const App = () => {
           </Route>
 
           <Route path='/categories'>
-            <Categories categories={categories} />
+            <Categories categories={categories} user={user}/>
           </Route>
 
           <Route path='/glasses/:glass'>
@@ -130,17 +126,6 @@ const App = () => {
             <Alcoholics alcoholics={alcoholics} />
           </Route>
 
-          {/* <Route path='/cocktails'>
-            <Cocktails />
-          </Route>
-
-          <Route path='/ordinarydrinks'>
-            <OrdinaryDrinks />
-          </Route>
-
-          <Route path='/shots'>
-            <Shots />
-          </Route> */}
 
         </Switch>
 
