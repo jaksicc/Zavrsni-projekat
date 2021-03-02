@@ -83,7 +83,7 @@ export const getDrinksByFirstLetter = (letter) => {
 // LOGIN I REGISTER
 
 export const getUsers = () => {
-    return axios.get('http://localhost:3005/users')
+    return axios.get('https://my-json-server.typicode.com/jaksicc/zavrsni-users-api-server/users')
 }
 
 export const postUser = (username, email, password) => {

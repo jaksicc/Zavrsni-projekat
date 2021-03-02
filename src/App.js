@@ -57,7 +57,7 @@ const App = () => {
 
   return (
     <>
-      <Router>
+      <Router basename={'/'}>
         <Header user={user} setUser={setUser} />
 
         <hr />
