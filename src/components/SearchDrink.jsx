@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Redirect } from "react-router-dom"
 import { getDrinkByName, getDrinksByFirstLetter, getIngredientImg, getIngredientInfo } from "../service"
 import DrinkByName from "./DrinkByName"
 import DrinksByLetter from "./DrinksByLetter"
 import IngredientByName from "./IngredientByName"
-import Ingredient from "./Ingredients/Ingredient"
+import StyledSearch from './StyledSearch'
 
-const SearchDrink = ({user}) => {
+
+const SearchDrink = ({ user }) => {
 
     const [drinkname, setDrinkName] = useState('')
     const [drinkbyname, setDrinkByName] = useState([])
@@ -19,27 +20,28 @@ const SearchDrink = ({user}) => {
     const [letter, setLetter] = useState('')
     const [drinksbyletter, setDrinksByLetter] = useState([])
 
-    return user?(
-        <>
+    return user ? (
+        <div>
+            <StyledSearch>
             <div>
-                <label htmlFor="">Enter name</label>
+                <label htmlFor="">Enter drink name </label>
                 <input type="text" onChange={(e) => setDrinkName(e.target.value)} />
                 <button onClick={() => {
                     getDrinkByName(drinkname).then(res => {
                         setDrinkByName(res.data.drinks)
-                       
+
 
                         setIngredientByName([])
                     })
                 }}>Search</button>
             </div>
             <div>
-                <label htmlFor="">Enter ingredient</label>
+                <label htmlFor="">Enter ingredient </label>
                 <input type="text" onChange={(e) => setIngredientName(e.target.value)} />
                 <button onClick={() => {
                     getIngredientInfo(ingredientname).then(res => {
                         setIngredientByName(res.data.ingredients)
-                        
+
 
                         getIngredientImg(ingredientname).then(res => {
                             setIngredientImg(res.config.url)
@@ -50,25 +52,26 @@ const SearchDrink = ({user}) => {
                 }}>Search</button>
             </div>
             <div>
-                <label htmlFor="">Search drinks by first letter</label>
-                <input  maxLength={1} type="text" onChange={(e) => setLetter(e.target.value)} />
+                <label htmlFor="">Search drinks by first letter </label>
+                <input maxLength={1} type="text" onChange={(e) => setLetter(e.target.value)} />
                 <button onClick={() => {
                     getDrinksByFirstLetter(letter).then(res => {
                         setDrinksByLetter(res.data.drinks)
-                        
+
 
                         setDrinkByName([])
                         setIngredientByName([])
                     })
                 }}>Search</button>
             </div>
+            </StyledSearch>
             <DrinkByName drinkbyname={drinkbyname} />
             <IngredientByName ingredientbyname={ingredientbyname} ingredientimg={ingredientimg} />
-            <DrinksByLetter drinksbyletter={drinksbyletter}/>
-        </>
+            <DrinksByLetter drinksbyletter={drinksbyletter} />
+        </div>
     )
-    :
-    <Redirect to="/login"></Redirect>
+        :
+        <Redirect to="/login"></Redirect>
 }
 
 export default SearchDrink

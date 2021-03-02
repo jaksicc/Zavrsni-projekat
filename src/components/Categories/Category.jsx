@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { getCategory } from "../../service"
+import StyledGlass from "../Glasses/StyledGlass"
 import StyledCategory from "./StyledCategory"
 
 const Category = () => {
@@ -23,7 +24,7 @@ const Category = () => {
 
     return (
         <>
-            {cat.map(cat => <StyledCategory key={cat.strDrink}>
+            {cat.map(cat => <StyledGlass key={cat.strDrink}>
             <Link to={`/categories/item/${cat.idDrink}`} >
                 <p>{cat.strDrink}</p>
                 <img src={`${cat.strDrinkThumb}/preview`} />
@@ -31,7 +32,7 @@ const Category = () => {
             {/* <div className='ime'>
             <p>{cat.strDrink}</p>
             </div> */}
-            </StyledCategory>)}
+            </StyledGlass>)}
         </>
     )
 }
