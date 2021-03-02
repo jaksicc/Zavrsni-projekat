@@ -67,6 +67,17 @@ export const getIngredientImg = (ingredient) => {
     return axios.get(`https://www.thecocktaildb.com/images/ingredients/${ingredient}-Medium.png`)
 }
 
+// Drink by name/first letter
+
+export const getDrinkByName = (name) => {
+    return axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
+}
+
+export const getDrinksByFirstLetter = (letter) => {
+    return axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`)
+}
+
+
 
 
 // LOGIN I REGISTER
@@ -79,44 +90,6 @@ export const postUser = (username, email, password) => {
     return axios.post('http://localhost:3005/users', {username, email, password})
 }
 ////////////////////////////////////////////
-export const getOrdinaryDrinks = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink")
-}
 
-export const getCocktails = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail")
-}
-
-export const getMilkFloatShake = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Milk_/_Float_/_Shake")
-}
-
-export const getCocoa = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocoa")
-}
-
-export const getShots = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Shot")
-}
-
-export const getCofeeTea = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Coffee_/_Tea")
-}
-
-export const getHomemadeLiqueur = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Homemade_Liqueur")
-}
-
-export const getPunchPartyDrink = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Punch_/_Party_Drink")
-}
-
-export const getBeer = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Beer")
-}
-
-export const getSoftDrinks = () => {
-    return axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Soft_Drink_/_Soda")
-}
 
 

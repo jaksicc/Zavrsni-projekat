@@ -23,11 +23,14 @@ const Category = () => {
 
     return (
         <>
-            {cat.map(cat => <StyledCategory>
-            <Link to={`/categories/item/${cat.idDrink}`} key={cat.strDrink}>
+            {cat.map(cat => <StyledCategory key={cat.strDrink}>
+            <Link to={`/categories/item/${cat.idDrink}`} >
                 <p>{cat.strDrink}</p>
                 <img src={`${cat.strDrinkThumb}/preview`} />
             </Link>
+            {/* <div className='ime'>
+            <p>{cat.strDrink}</p>
+            </div> */}
             </StyledCategory>)}
         </>
     )

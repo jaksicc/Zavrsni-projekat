@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
-import { getUsers, postUser } from "../service"
+import { getUsers, postUser } from "../../service"
+import StyledLoginRegister from "./StyledLogin"
 
 const Register = () => {
 
@@ -17,7 +18,7 @@ const Register = () => {
     let history = useHistory()
 
     return (
-        <>
+        <StyledLoginRegister>
             <form onSubmit={(e) => {
                 e.preventDefault()
                 getUsers().then(res => {
@@ -42,21 +43,21 @@ const Register = () => {
                 })
             }}>
                 <h3>Register</h3>
-                <div>
+                <div className='logreg'>
                     <label htmlFor="username">Username</label>
                     <input value={username} type="text" name="username" placeholder="username" onChange={(e) => setUsername(e.target.value)} />
                 </div>
-                <div>
+                <div className='logreg'>
                     <label htmlFor="email">E-mail</label>
                     <input value={email} type="text" name="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
-                <div>
+                <div className='logreg'>
                     <label htmlFor="password">Password</label>
                     <input value={password} type="password" name="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <input type="submit" />
             </form>
-        </>
+        </StyledLoginRegister>
     )
 }
 

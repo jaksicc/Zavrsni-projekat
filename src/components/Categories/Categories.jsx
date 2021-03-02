@@ -1,21 +1,22 @@
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import styled from "styled-components"
 import StyledCategories from "./StyledCategories"
 
-const Categories = ({ categories }) => {
-    // const StyledLink = styled.link`
-    //     background-color: green
-    // `
+const Categories = ({ categories, user }) => {
 
-
-    return (
+    return user? (
         <>
-            {categories.map(category => <div key={category.strCategory}>
+            {categories.map(category => <StyledCategories key={category.strCategory}>
 
-                <StyledCategories to={`/categories/${(category.strCategory).split('/').join('-')}`}>{category.strCategory}</StyledCategories>
+                <Link to={`/categories/${(category.strCategory).split('/').join('-')}`}><p>{category.strCategory}</p></Link>
 
-            </div>)}
+            </StyledCategories>)}
         </>
+    )
+    :
+    (
+
+        <Redirect to='/login'></Redirect>
     )
 }
 

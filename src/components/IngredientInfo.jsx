@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getIngredientImg, getIngredientInfo } from "../service"
-import Ingredient from "./Ingredient"
+import StyledCoctailInfo from "./CocktailInfo/StyledCocktailInfo"
+
 
 const IngredientInfo = () => {
 
@@ -25,11 +26,11 @@ const IngredientInfo = () => {
 
     return (
         <>
-            {ingredientinfo.map(info => <div key={info.strIngredient}>
+            {ingredientinfo.map(info => <StyledCoctailInfo key={info.strIngredient}>
                 <p>{info.strIngredient}</p>
                 <img src={ingredientimg} alt=""/>
                 <p>{info.strDescription}</p>
-            </div>)}
+            </StyledCoctailInfo>)}
         </>
     )
 }

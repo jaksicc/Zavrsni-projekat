@@ -3,18 +3,21 @@ import { getAllCategories, getAllGlasses, getAllIngredients, getByAlcohol } from
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Categories from "./components/Categories/Categories"
 import Category from "./components/Categories/Category"
-import Glasses from "./components/Glasses"
-import Glass from "./components/Glass"
-import Ingredients from "./components/Ingredients"
-import Ingredient from "./components/Ingredient"
-import Alcoholics from "./components/Alcoholics"
-import Alcoholic from "./components/Alcoholic"
+import Glasses from "./components/Glasses/Glasses"
+import Glass from "./components/Glasses/Glass"
+import Ingredients from "./components/Ingredients/Ingredients"
+import Ingredient from "./components/Ingredients/Ingredient"
 import CocktailInfo from "./components/CocktailInfo/CocktailInfo"
 import RandomCocktail from "./components/RandomCocktail"
 import IngredientInfo from "./components/IngredientInfo"
-import Login from "./components/Login"
-import Register from "./components/Register"
-import StyledCategories from "./components/Categories/StyledCategories"
+import Login from "./components/LoginRegister/Login"
+import Register from "./components/LoginRegister/Register"
+import '../src/main.css'
+import Header from "./components/Header/Header"
+import Alcoholic from "./components/Alcoholics/Alcoholic"
+import Alcoholics from "./components/Alcoholics/Alcoholics"
+import SearchDrink from "./components/SearchDrink"
+
 
 
 
@@ -55,28 +58,19 @@ const App = () => {
   return (
     <>
       <Router>
-        <nav>
-          {user ?
-            <>
-              <p>User: {user.username}</p>
-              <Link style={{ padding: 5 }} to='/categories'>Categories</Link>
-              <Link style={{ padding: 5 }} to='/glasses'>Glasses</Link>
-              <Link style={{ padding: 5 }} to='/ingredients'>Ingredients</Link>
-              <Link style={{ padding: 5 }} to='/alcoholics'>Alcoholic/Non Alcoholic</Link>
-              <RandomCocktail />
-            </>
-            :
-            <>
-              <Link style={{ padding: 5 }} to="/login">Login</Link>
-              <Link style={{ padding: 5 }} to="/register">Register</Link>
-            </>
-
-          }
-        </nav>
+        <Header user={user} setUser={setUser} />
 
         <hr />
 
         <Switch>
+
+          <Route path='/search'>
+            <SearchDrink user={user} />
+          </Route>
+
+          <Route path='/random'>
+            <RandomCocktail />
+          </Route>
 
           <Route path="/login">
             <Login setUser={setUser} />
@@ -95,7 +89,7 @@ const App = () => {
           </Route>
 
           <Route path='/categories'>
-            <Categories categories={categories} user={user}/>
+            <Categories categories={categories} user={user} />
           </Route>
 
           <Route path='/glasses/:glass'>
@@ -103,7 +97,7 @@ const App = () => {
           </Route>
 
           <Route path='/glasses'>
-            <Glasses glasses={glasses} />
+            <Glasses glasses={glasses} user={user} />
           </Route>
 
           <Route path='/ingredients/info/:name'>
@@ -115,7 +109,7 @@ const App = () => {
           </Route>
 
           <Route path='/ingredients'>
-            <Ingredients ingredients={ingredients} />
+            <Ingredients ingredients={ingredients} user={user} />
           </Route>
 
           <Route path='/alcoholics/:alcoholic'>
@@ -123,7 +117,11 @@ const App = () => {
           </Route>
 
           <Route path='/alcoholics'>
-            <Alcoholics alcoholics={alcoholics} />
+            <Alcoholics alcoholics={alcoholics} user={user} />
+          </Route>
+
+          <Route path='/random'>
+            <RandomCocktail />
           </Route>
 
 
